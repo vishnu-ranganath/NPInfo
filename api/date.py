@@ -7,5 +7,5 @@ class handler(BaseHTTPRequestHandler):
     self.send_response(200)
     self.send_header('Content-type', 'text/plain')
     self.end_headers()
-    self.wfile.write(str(os.environ['NPS_API_TOKEN']))
+    self.wfile.write(str(os.getenv('NPS_API_TOKEN'))[0:3])
     return
