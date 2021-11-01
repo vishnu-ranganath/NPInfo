@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 		api_key: process.env.API_URL
 	};
 	
-	const npsReq https.request(options, npsRes => {
+	const npsReq = https.request(options, npsRes => {
 		npsRes.on("data", d => {
 			res.status(200).send(d);
 		});
