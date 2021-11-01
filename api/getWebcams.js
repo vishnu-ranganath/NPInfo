@@ -14,7 +14,7 @@ module.exports = (req, res) => {
 	
 	const npsReqParams = {
 		parkCode: "acad",
-		api_key: process.env.API_URL
+		api_key: process.env.NP_API_TOKEN
 	};
 	
 	const npsReq = https.request(options, npsRes => {
