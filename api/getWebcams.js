@@ -14,7 +14,7 @@ module.exports = (req, res) => {
 	
 	const options = {
 		hostname: 'developer.nps.gov',
-		path: '/api/v1/parks?' + querystring.stringify(npsReq),
+		path: '/api/v1/parks?' + querystring.stringify(npsReqParams),
 		method: 'get'
 	};
 	
