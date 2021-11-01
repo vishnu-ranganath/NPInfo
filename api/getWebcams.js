@@ -23,10 +23,10 @@ module.exports = (req, res) => {
 			res.status(200).send(d);
 		});
 	});
-	
+	/*
 	npsReq.on('error', error => {
 		res.status(200).send("API Call failed!");
-	});
+	});*/
 	
 	npsReq.end();
 };
