@@ -14,19 +14,21 @@ module.exports = (req, res) => {
 	
 	const options = {
 		hostname: 'developer.nps.gov',
-		path: '/api/v1/parks?' + querystring.stringify(npsReqParams),
+		path: '/api/v1/parks?' + querystring.stringify(npsReq),
 		method: 'get'
 	};
 	
 	const npsReq = https.request(options, npsRes => {
 		npsRes.on("data", d => {
-			res.status(200).send(d);
+			requestData += d.toString();
+		}).on("end", () => {
+			res.status(200).send(requestData);
 		});
 	});
 	/*
 	npsReq.on('error', error => {
 		res.status(200).send("API Call failed!");
-	});*/
-	
+	});
+	*/
 	npsReq.end();
 };
