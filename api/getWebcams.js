@@ -22,7 +22,7 @@ module.exports = (req, res) => {
 		npsRes.on("data", d => {
 			requestData += d.toString();
 		}).on("end", () => {
-			res.status(200).send(requestData);
+			//res.status(200).send(requestData);
 		});
 	});
 	/*
