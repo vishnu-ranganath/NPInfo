@@ -12,9 +12,9 @@ class AllActivities extends React.Component {
 	componentDidMount() {
 		const allActReq = new XMLHttpRequest();
 		allActReq.onreadystatechange = () => {
-			if(allActReq.readyState != XMLHttpRequest.DONE) {
+			if(allActReq.readyState !== XMLHttpRequest.DONE) {
 				return;
-			} else if(allActReq.status == 200) {
+			} else if(allActReq.status === 200) {
 				let activityData = JSON.parse(allActReq.responseText);
 				this.setState({activityList: activityData.data});
 			}
