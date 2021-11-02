@@ -1,0 +1,1 @@
+const apiKey = process.env.NPS_API_TOKEN;
