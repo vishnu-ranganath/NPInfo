@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {apiKey} from './api';
 import './App.css';
 
