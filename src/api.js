@@ -1,4 +1,4 @@
 //The API token is to be stored as an environment variable on the server
-const apiKey = process.env.NPS_API_TOKEN;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 export {apiKey};

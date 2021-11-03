@@ -31,7 +31,7 @@ class AllActivities extends React.Component {
 		if(apiKey === undefined) {
 			return (
 				<div className="AllActivities">
-					No token! {process.env.NPS_API_TOKEN[1]}
+					No token!
 				</div>
 			);
 		}
