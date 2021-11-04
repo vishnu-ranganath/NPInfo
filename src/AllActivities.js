@@ -37,12 +37,12 @@ class AllActivities extends React.Component {
 		}
 		
 		const activities = this.state.activityList.map((a) =>
-			<li>{a.name}</li>
+			<option value={a.id}>{a.name}</option>
 		);
 		
 		return (
 			<div className="AllActivities">
-				<ul>{activities}</ul>
+				<select>{activities}</select>
 			</div>
 		);
 		
