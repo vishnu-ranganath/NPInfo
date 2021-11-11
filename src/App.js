@@ -6,7 +6,7 @@ class App extends React.Component {
 	
 	constructor(props) {
 		super(props);
-		this.state = {activityList: [], activity: "", parks: []};
+		this.state = {activityList: [], parks: []};
 	}
 	
 	componentDidMount() {
@@ -24,17 +24,18 @@ class App extends React.Component {
 	}
 
 	handleChange = (event) => {
-		this.setState({activity: event.target.value});
+		const activity = event.target.value;
 		const parksByActReq = new XMLHttpRequest();
 		parksByActReq.onreadystatechange = () => {
 			if(parksByActReq.readyState !== XMLHttpRequest.DONE) {
 				return;
 			} else if(parksByActReq.status === 200) {
-				let activityData = JSON.parse(parksByActReq.responseText);
-				this.setState({parks: activityData.data[0].parks});
+				let parkData = JSON.parse(parksByActReq.responseText);
+				this.setState({parks: parkData.data[0].parks});
 			}
 		}
-		parksByActReq.open("GET", "https://developer.nps.gov/api/v1/activities/parks?api_key=" + apiKey + "&id=" + this.state.activity, true);
+		console.log(activity);
+		parksByActReq.open("GET", "https://developer.nps.gov/api/v1/activities/parks?api_key=" + apiKey + "&id=" + activity, true);
 		parksByActReq.send();
 	}
 	
