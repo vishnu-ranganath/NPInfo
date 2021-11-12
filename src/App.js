@@ -1,6 +1,11 @@
-import './App.css';
 import React from 'react';
 import ParksByActivity from './ParksByActivity';
+import './App.css';
+
+import ParkCard from './ParkCard';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class App extends React.Component {
 	
@@ -25,10 +30,15 @@ class App extends React.Component {
 		);
 		
 		return (
-			<div className="App">
+			<Container className="App">
 				<ParksByActivity setParks={this.setParks}/>
-				<select id={"parkSelector"}>{parks}</select>
-			</div>
+				<Row>
+					<Col>
+						<select id={"parkSelector"}>{parks}</select>
+					</Col>
+				</Row>
+				<ParkCard/>
+			</Container>
 		);
 		
 	}

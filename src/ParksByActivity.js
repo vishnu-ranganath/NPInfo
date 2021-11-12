@@ -1,6 +1,9 @@
 import React from 'react';
 import {apiKey} from './api';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 class ParksByActivity extends React.Component {
 	
 	constructor(props) {
@@ -49,9 +52,11 @@ class ParksByActivity extends React.Component {
 		);
 		
 		return (
-			<div className="ParksByActivity">
-				<select onChange={this.handleChange} id={"activitySelector"}>{activities}</select>
-			</div>
+			<Row className="ParksByActivity">
+				<Col>
+					<select onChange={this.handleChange} id={"activitySelector"}>{activities}</select>
+				</Col>
+			</Row>
 		);
 		
 	}
