@@ -1,19 +1,9 @@
 import React from 'react';
-import {apiKey} from './api';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 class ParkCard extends React.Component {
-	
-	constructor(props) {
-		super(props);
-	}
-	
-	componentDidMount() {
-	}
-	
 	render() {
 
 		return (
@@ -29,7 +19,6 @@ class ParkCard extends React.Component {
 		);
 		
 	}
-
 }
 
 export default ParkCard;
