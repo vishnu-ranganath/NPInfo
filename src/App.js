@@ -1,11 +1,11 @@
 import React from 'react';
 import ParksByActivity from './ParksByActivity';
 import './App.css';
+import {apiKey} from './api';
 
 import ParkCard from './ParkCard';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 class App extends React.Component {
 	
@@ -16,28 +16,49 @@ class App extends React.Component {
 	}
 
 	setParks(parkList) {
-		this.setState({parks: parkList});
+		this.setState({parks: []});
+		let parkCodes = "";
+
+		parkList.map((currPark) => {
+			return currPark.parkCode
+		}).forEach((x) => {
+			parkCodes = parkCodes + "," + x;
+		});
+
+		if(parkCodes === "") {
+			return;
+		}
+
+		parkCodes = parkCodes.slice(1);
+		
+		const getParksReq = new XMLHttpRequest();
+		getParksReq.onreadystatechange = () => {
+			if(getParksReq.readyState !== XMLHttpRequest.DONE) {
+				return;
+			} else if(getParksReq.status === 200) {
+				let parkInfo = JSON.parse(getParksReq.responseText);
+				console.log(parkInfo);
+				this.setState({
+					parks: parkInfo.data,
+					ready: true
+				});
+			}
+		}
+		getParksReq.open("GET", "https://developer.nps.gov/api/v1/parks?api_key=" + apiKey + "&limit=500&parkCode=" + parkCodes, true);
+		getParksReq.send();
 	}
 	
 	render() {
+		const parkCards = this.state.parks.map((x) => {
+			return <ParkCard park={x}/>;
+		});
 
-		const parks = this.state.parks.map((a) =>
-			<option value={a.parkCode}>{a.name}</option>
-		);
-		
-		parks.unshift(
-			<option value={"blank"} hidden={true}>Select a park</option>
-		);
+		console.log(this.state.parks);
 		
 		return (
 			<Container className="App">
 				<ParksByActivity setParks={this.setParks}/>
-				<Row>
-					<Col>
-						<select id={"parkSelector"}>{parks}</select>
-					</Col>
-				</Row>
-				<ParkCard/>
+				<Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">{parkCards}<br/></Row>
 			</Container>
 		);
 		
