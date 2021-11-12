@@ -1,7 +1,7 @@
 import React from 'react';
-import {apiKey} from './api';
+//import {apiKey} from './api';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -31,6 +31,7 @@ class ParkCard extends React.Component {
 		return (
 			<Row className="ParkCard">
 				<Col>
+
 				</Col>
 			</Row>
 		);
