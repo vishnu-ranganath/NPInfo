@@ -16,7 +16,6 @@ class App extends React.Component {
 	}
 
 	setParks(parkList) {
-		this.setState({parks: []});
 		let parkCodes = "";
 
 		parkList.map((currPark) => {
@@ -37,7 +36,6 @@ class App extends React.Component {
 				return;
 			} else if(getParksReq.status === 200) {
 				let parkInfo = JSON.parse(getParksReq.responseText);
-				console.log(parkInfo);
 				this.setState({
 					parks: parkInfo.data,
 					ready: true
@@ -50,15 +48,13 @@ class App extends React.Component {
 	
 	render() {
 		const parkCards = this.state.parks.map((x) => {
-			return <ParkCard park={x}/>;
+			return <ParkCard park={x} key={x.parkCode}/>;
 		});
-
-		console.log(this.state.parks);
 		
 		return (
-			<Container className="App">
+			<Container fluid className="App">
 				<ParksByActivity setParks={this.setParks}/>
-				<Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">{parkCards}<br/></Row>
+				<Row xs={1} sm={2} md={3} lg={4} xl={5} xxl={6} className="g-4">{parkCards}<br/></Row>
 			</Container>
 		);
 		

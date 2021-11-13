@@ -44,11 +44,11 @@ class ParksByActivity extends React.Component {
 	render() {
 		
 		const activities = this.state.activityList.map((a) =>
-			<option value={a.id}>{a.name}</option>
+			<option value={a.id} key={a.id}>{a.name}</option>
 		);
 		
 		activities.unshift(
-			<option value={"blank"} hidden={true}>Select an activity</option>
+			<option value={"blank"} key="blank" hidden={true}>Select an activity</option>
 		);
 		
 		return (
