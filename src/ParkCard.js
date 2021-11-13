@@ -17,8 +17,6 @@ class ParkCard extends React.Component {
 			stateString = this.props.park.states.split(",").slice(0, 4).join(", ");
 		}
 
-		console.log(this.props.showPark);
-
 		return (
 			<Col className="ParkCard">
 				<Card>
@@ -27,7 +25,7 @@ class ParkCard extends React.Component {
 					<Card.Subtitle className="text-muted">{stateString}</Card.Subtitle>
 					<Card.Text style={{maxHeight: "6rem", minHeight: "6rem", overflow: "hidden"}}>{this.props.park.description}</Card.Text>
 					<Card.Footer className="text-muted">
-						<Card.Link href="javascript:void(0)" onClick={() => {this.props.showPark(this.props.park)}}>Learn More</Card.Link>
+						<Card.Link href="" onClick={(event) => {event.preventDefault(); this.props.showPark(this.props.park); }}>Learn More</Card.Link>
 					</Card.Footer>
 				</Card>
 			</Col>
