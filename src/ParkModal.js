@@ -1,19 +1,39 @@
 import React from 'react';
+import {apiKey} from './api';
+import './ParkModal.css';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
-//import Button from 'react-bootstrap/Button';
 
 class ParkModal extends React.Component {
 	
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOpen: (this.props.park !== null)
+			isOpen: (this.props.park !== null),
+			ready: false,
+			webcams: {}
 		};
 		this.closeModal = this.closeModal.bind(this);
+	}
+
+	componentDidMount() {
+		if(this.props.park === null) {
+			return;
+		}
+		const camReq = new XMLHttpRequest();
+		camReq.onreadystatechange = () => {
+			if(camReq.readyState !== XMLHttpRequest.DONE) {
+				return;
+			} else if(camReq.status === 200) {
+				let camData = JSON.parse(camReq.responseText);
+				this.setState({ready: true, webcams: camData});
+			}
+		}
+		camReq.open("GET", "https://developer.nps.gov/api/v1/webcams?api_key=" + apiKey + "&parkCode=" + this.props.park.parkCode, true);
+		camReq.send();
 	}
 
 	closeModal() {
@@ -23,6 +43,12 @@ class ParkModal extends React.Component {
 	render() {
 		
 		if(!this.state.isOpen) {
+			return (
+				<Modal className="ParkModal" show={false}></Modal>
+			);
+		}
+
+		if(!this.state.ready) {
 			return (
 				<Modal className="ParkModal" show={false}></Modal>
 			);
@@ -53,6 +79,39 @@ class ParkModal extends React.Component {
 			email = <a href={"mailto:" + this.props.park.contacts.emailAddresses[0].emailAddress}>{this.props.park.contacts.emailAddresses[0].emailAddress}</a>
 		}
 
+		let webcamInfo = <span></span>;
+		if(this.state.webcams.total === "0") {
+			webcamInfo = <h6>None</h6>;
+		} else {
+			webcamInfo = this.state.webcams.data.map((c) => {
+					return <h6 key={c.id}>{c.title}: <a href={c.url}>{c.url}</a> ({c.isStreaming ? "Streaming" : "Not streaming"}, {c.status})</h6>
+			})
+		}
+
+		let webcamImages = [];
+
+		if(this.state.webcams.total === "0") {
+			webcamImages = <h6 key="none">None</h6>;
+		} else {
+			let numImages = 0;
+			this.state.webcams.data.forEach((c) => {
+				if(c.images !== []) {
+					c.images.forEach((i) => {
+						webcamImages.push(
+							<Col key={i.id} >
+								<div><img className="cam" src={i.url} alt={i.altText}/></div>
+								<p>{i.caption} (Credit: {i.credit})</p>
+							</Col>
+						);
+						numImages += 1;
+					});
+				}
+			});
+			if(numImages === 0) {
+				webcamImages = <h6 key="none">None found.</h6>
+			}
+		}
+
 		return (
 			<Modal className="ParkModal" show={this.state.isOpen} onHide={this.closeModal} fullscreen={true} >
 				<Modal.Header closeButton>
@@ -81,6 +140,16 @@ class ParkModal extends React.Component {
 						<Row className="mb-2 mt-2">
 							<h5>Activities</h5>
 							<h6>{activities}</h6>
+						</Row>
+						<Row className="mb-2 mt-2">
+							<h5>Webcams</h5>
+							{webcamInfo}
+						</Row>
+						<Row className="mt-2">
+							<h5>Webcam Images</h5>
+						</Row>
+						<Row className="mb-2">
+							{webcamImages}
 						</Row>
 					</Container>
 				</Modal.Body>
