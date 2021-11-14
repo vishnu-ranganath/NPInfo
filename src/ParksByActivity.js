@@ -47,9 +47,11 @@ class ParksByActivity extends React.Component {
 			<option value={a.id} key={a.id}>{a.name}</option>
 		);
 		
-		activities.unshift(
-			<option value={"blank"} key="blank" hidden={true}>Select an activity</option>
-		);
+		if(this.state.parks.length === 0) {
+			activities.unshift(
+				<option value={"blank"} key="blank" disabled={true}>Select an activity</option>
+			);
+		}
 		
 		return (
 			<Row className="ParksByActivity">

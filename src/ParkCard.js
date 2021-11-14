@@ -21,7 +21,7 @@ class ParkCard extends React.Component {
 
 		return (
 			<Col className="ParkCard">
-				<Card>
+				<Card className="park-card">
 					<Card.Img variant="top" src={this.props.park.images[0].url} className="parkThumbnail"/>
 					<Card.Title>{this.props.park.name}</Card.Title>
 					<Card.Subtitle className="text-muted">{stateString}</Card.Subtitle>
