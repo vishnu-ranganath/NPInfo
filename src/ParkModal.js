@@ -40,7 +40,7 @@ class ParkModal extends React.Component {
 			return;
 		});
 
-		let phoneNumber = <a></a>;
+		let phoneNumber = <span></span>;
 		this.props.park.contacts.phoneNumbers.forEach((n) => {
 			if(n.type === "Voice") {
 				phoneNumber = <a href={"tel:1-" + n.phoneNumber}>{n.phoneNumber}</a>;
@@ -48,7 +48,7 @@ class ParkModal extends React.Component {
 			}
 		});
 
-		let email = <a></a>;
+		let email = <span></span>;
 		if(this.props.park.contacts.emailAddresses.length > 0) {
 			email = <a href={"mailto:" + this.props.park.contacts.emailAddresses[0].emailAddress}>{this.props.park.contacts.emailAddresses[0].emailAddress}</a>
 		}
