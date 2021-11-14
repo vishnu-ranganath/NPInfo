@@ -54,7 +54,8 @@ class ParksByActivity extends React.Component {
 		}
 		
 		return (
-			<Row className="ParksByActivity">
+			<Row className="ParksByActivity mt-3 mb-3">
+				<Col>US. National Parks Information</Col>
 				<Col>
 					<select onChange={this.handleChange} id={"activitySelector"}>{activities}</select>
 				</Col>

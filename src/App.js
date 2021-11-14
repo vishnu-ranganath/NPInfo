@@ -7,6 +7,7 @@ import ParkModal from './ParkModal';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class App extends React.Component {
 	
@@ -72,6 +73,10 @@ class App extends React.Component {
 				<ParksByActivity setParks={this.setParks}/>
 				<Row xs={1} sm={2} md={3} lg={4} xl={5} xxl={6} className="g-4">{parkCards}<br/></Row>
 				<ParkModal park={this.state.parkToDisplayInfo} key={modalKey} closeModal={this.closeModal}/>
+				<Row>
+					<Col>Vishnu Ranganath, Nov. 2021</Col>
+					<Col>Not affiliated with or endorsed by the U.S. National Parks Service</Col>
+				</Row>
 			</Container>
 		);
 		
