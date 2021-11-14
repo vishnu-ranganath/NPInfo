@@ -5,6 +5,7 @@
     max-width: 100%;
 }
 
+/*.parkCard would be too similar to .ParkCard*/
 .park-card {
     max-height: 25em;
 }

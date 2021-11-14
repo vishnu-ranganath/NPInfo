@@ -16,7 +16,6 @@ class ParkModal extends React.Component {
 			ready: false,
 			webcams: {}
 		};
-		this.closeModal = this.closeModal.bind(this);
 	}
 
 	componentDidMount() {
@@ -34,10 +33,6 @@ class ParkModal extends React.Component {
 		}
 		camReq.open("GET", "https://developer.nps.gov/api/v1/webcams?api_key=" + apiKey + "&parkCode=" + this.props.park.parkCode, true);
 		camReq.send();
-	}
-
-	closeModal() {
-		this.props.closeModal();
 	}
 	
 	render() {
@@ -113,7 +108,7 @@ class ParkModal extends React.Component {
 		}
 
 		return (
-			<Modal className="ParkModal" show={this.state.isOpen} onHide={this.closeModal} fullscreen={true} >
+			<Modal className="ParkModal" show={this.state.isOpen} onHide={this.props.closeModal} fullscreen={true} >
 				<Modal.Header closeButton>
 					<Modal.Title>{this.props.park.fullName}</Modal.Title>
 				</Modal.Header>
