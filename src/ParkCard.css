@@ -1,0 +1,11 @@
+.parkThumbnail {
+    max-height: 9rem;
+    margin: auto;
+    width: unset;
+}
+
+.parkText {
+    max-height: 6rem;
+    min-height: 6rem;
+    overflow: hidden;
+}

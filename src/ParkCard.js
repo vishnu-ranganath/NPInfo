@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './ParkCard.css';
+
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
@@ -20,10 +22,10 @@ class ParkCard extends React.Component {
 		return (
 			<Col className="ParkCard">
 				<Card>
-					<Card.Img variant="top" src={this.props.park.images[0].url} style={{maxHeight: "9rem", minHeight: "9rem"}}/>
+					<Card.Img variant="top" src={this.props.park.images[0].url} className="parkThumbnail"/>
 					<Card.Title>{this.props.park.name}</Card.Title>
 					<Card.Subtitle className="text-muted">{stateString}</Card.Subtitle>
-					<Card.Text style={{maxHeight: "6rem", minHeight: "6rem", overflow: "hidden"}}>{this.props.park.description}</Card.Text>
+					<Card.Text className="parkText">{this.props.park.description}</Card.Text>
 					<Card.Footer className="text-muted">
 						<Card.Link href="" onClick={(event) => {event.preventDefault(); this.props.showPark(this.props.park); }}>Learn More</Card.Link>
 					</Card.Footer>
